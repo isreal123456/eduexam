@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Already Taken{% endblock %}
+
+{% block content %}
+<div class="alert alert-warning text-center">
+  <h2>You have already taken the exam for {{ subject.name }}.</h2>
+  <p>Students can only take each subject once.</p>
+  <a href="{% url 'student_dashboard' %}" class="btn btn-secondary mt-3">Go Back</a>
+</div>
+{% endblock %}

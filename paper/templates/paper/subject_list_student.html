@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Available Subjects{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Available Subjects</h2>
+
+    {% if subjects %}
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for subject in subjects %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ subject.name }}</h5>
+                            <p class="card-text text-muted">Duration: {{ subject.duration_minutes }} minutes</p>
+                            <a href="{% url 'take_exam' subject.id %}" class="btn btn-primary">Take Exam</a>
+
+                            {% if request.user.is_staff %}
+                                <a href="{% url 'edit_subject' subject.id %}" class="btn btn-outline-secondary ms-2">Edit</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">No subjects available at the moment.</p>
+    {% endif %}
+</div>
+{% endblock %}

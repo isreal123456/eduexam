@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Your Exam Result{% endblock %}
+
+{% block content %}
+<div class="text-center">
+  <h1>Exam Result for {{ subject.name }}</h1>
+  <p class="lead mt-4">You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.</p>
+  <p>Date Taken: {{ date_taken|date:"M d, Y H:i" }}</p>
+  <a href="{% url 'student_dashboard' %}" class="btn btn-primary mt-4">Back to Dashboard</a>
+</div>
+{% endblock %}

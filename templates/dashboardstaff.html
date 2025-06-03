@@ -1,0 +1,106 @@
+{% extends "base2.html" %}
+
+{% block title %}Staff Dashboard{% endblock %}
+
+{% block content %}
+<style>
+    .dashboard-header {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #1a1a2e;
+    }
+
+    .dashboard-subheader {
+        font-size: 1.2rem;
+        color: #6c757d;
+    }
+
+    .dashboard-card {
+        border-radius: 1.25rem;
+        transition: all 0.3s ease;
+        background: #fff;
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-icon {
+        font-size: 3rem;
+        margin-bottom: 0.75rem;
+        color: #0d6efd;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .dashboard-btn {
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+    }
+</style>
+
+<div class="container py-5">
+    <h1 class="dashboard-header mb-2">Staff Dashboard</h1>
+    <p class="dashboard-subheader">Welcome, <strong>{{ user.get_full_name|default:user.email }}</strong></p>
+
+    <div class="row g-4 mt-4">
+        <!-- Subjects -->
+        <div class="col-md-4">
+            <div class="card dashboard-card shadow-sm p-4 h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-book card-icon"></i>
+                    <h5 class="card-title">Subjects</h5>
+                    <p class="stat-number">{{ subjects_count }}</p>
+                    <p class="text-muted">Total subjects created.</p>
+                    <a href="{% url 'subject_list' %}" class="btn btn-outline-primary dashboard-btn">Manage Subjects</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Questions -->
+        <div class="col-md-4">
+            <div class="card dashboard-card shadow-sm p-4 h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-question-circle card-icon text-success"></i>
+                    <h5 class="card-title">Questions</h5>
+                    <p class="stat-number">{{ questions_count }}</p>
+                    <p class="text-muted">All subject questions added.</p>
+                    <a href="{% url 'subject_list' %}" class="btn btn-outline-success dashboard-btn">Manage Questions</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exams Taken -->
+        <div class="col-md-4">
+            <div class="card dashboard-card shadow-sm p-4 h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-bar-chart-line card-icon text-info"></i>
+                    <h5 class="card-title">Exams Taken</h5>
+                    <p class="stat-number">{{ exams_taken }}</p>
+                    <p class="text-muted">Student exams completed.</p>
+                    <a href="{% url 'all_results' %}" class="btn btn-outline-info dashboard-btn">View Reports</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-end mt-5">
+        <a href="{% url 'create_subject' %}" class="btn btn-success btn-lg shadow rounded-pill">
+            + Create New Subject
+        </a>
+    </div>
+</div>
+
+<!-- Bootstrap Icons CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+{% endblock %}

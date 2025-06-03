@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}{{ subject.name }} - Exam{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">{{ subject.name }} Exam</h2>
+
+    <div class="alert alert-info d-flex justify-content-between align-items-center">
+        <div><strong>Time Remaining:</strong> <span id="timer"></span></div>
+    </div>
+
+    <form method="post" id="examForm">
+        {% csrf_token %}
+        {% for question in questions %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <strong>Q{{ forloop.counter }}:</strong> {{ question.text }}
+            </div>
+            <div class="card-body">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q{{ question.id }}" value="A" id="q{{ question.id }}a">
+                    <label class="form-check-label" for="q{{ question.id }}a">{{ question.option_a }}</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q{{ question.id }}" value="B" id="q{{ question.id }}b">
+                    <label class="form-check-label" for="q{{ question.id }}b">{{ question.option_b }}</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q{{ question.id }}" value="C" id="q{{ question.id }}c">
+                    <label class="form-check-label" for="q{{ question.id }}c">{{ question.option_c }}</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q{{ question.id }}" value="D" id="q{{ question.id }}d">
+                    <label class="form-check-label" for="q{{ question.id }}d">{{ question.option_d }}</label>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Submit Exam</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const timeLeft = {{ duration_seconds }};
+    const timerElement = document.getElementById('timer');
+    const examForm = document.getElementById('examForm');
+
+    let countdown = timeLeft;
+
+    function updateTimer() {
+        const minutes = Math.floor(countdown / 60);
+        const seconds = countdown % 60;
+
+        timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+        if (countdown <= 0) {
+            clearInterval(timerInterval);
+            timerElement.textContent = "00:00";
+            examForm.submit();
+        }
+
+        countdown--;
+    }
+
+    const timerInterval = setInterval(updateTimer, 1000);
+    updateTimer();
+</script>
+{% endblock %}
