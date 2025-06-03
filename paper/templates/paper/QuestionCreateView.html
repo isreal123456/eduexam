@@ -1,0 +1,7 @@
+<h2>Add Question to {{ subject.name }}</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Save Question</button>
+</form>

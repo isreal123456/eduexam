@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Exam Score{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+  <h2 class="mb-4">Your Score</h2>
+  <div class="alert alert-success fs-4">
+    You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>.
+  </div>
+  <a href="{% url 'subject_list_student' %}" class="btn btn-secondary mt-3">Back to Subjects</a>
+</div>
+{% endblock %}

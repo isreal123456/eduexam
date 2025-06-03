@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}My Exam Report{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4 text-success">Exam Report for {{ student }}</h2>
+
+  {% if report %}
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped align-middle text-center">
+        <thead class="table-light">
+          <tr>
+            <th>Subject</th>
+            <th>Score</th>
+            <th>Total</th>
+            <th>Percentage</th>
+            <th>Date Taken</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in report %}
+            <tr>
+              <td>{{ row.subject }}</td>
+              <td>{{ row.score }}</td>
+              <td>{{ row.total }}</td>
+              <td>{{ row.percentage }}%</td>
+              <td>{{ row.date_taken|date:"Y-m-d H:i" }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="text-muted">You have not taken any exams yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

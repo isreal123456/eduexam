@@ -1,0 +1,32 @@
+{% extends "base2.html" %}
+
+{% block title %}Create New Subject{% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 600px;">
+    <h2 class="mb-4">Create New Subject</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="id_name" class="form-label">Subject Name</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+                <div class="text-danger">{{ form.name.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_duration_minutes" class="form-label">Duration (minutes)</label>
+            {{ form.duration_minutes }}
+            <div class="form-text">Enter the time limit for exams on this subject.</div>
+            {% if form.duration_minutes.errors %}
+                <div class="text-danger">{{ form.duration_minutes.errors }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-success">Create Subject</button>
+        <a href="{% url 'subject_list' %}" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Result for {{ subject.name }}{% endblock %}
+{% block content %}
+<h2>Result for {{ subject.name }}</h2>
+
+<ul class="list-group mb-4">
+  <li class="list-group-item">Score: <strong>{{ result.score }}</strong> out of <strong>{{ result.total }}</strong></li>
+  <li class="list-group-item">Percentage: <strong>{{ result.score|divisibleby:result.total|floatformat:2 }}%</strong></li>
+  <li class="list-group-item">Date Taken: <strong>{{ result.date_taken|date:"Y-m-d H:i" }}</strong></li>
+</ul>
+
+<a href="{% url 'student_result_report' %}" class="btn btn-secondary">Back to My Report</a>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base2.html" %}
+{% load dict_extras %}
+
+{% block title %}Manage Questions for {{ subject.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4" style="max-width: 800px;">
+  <h1 class="mb-4">Manage Questions for <span class="text-success">{{ subject.name }}</span></h1>
+
+  <!-- Add Question Section -->
+  <section class="mb-5">
+    <h2 class="h4 mb-3">Add New Question</h2>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ add_form.as_p }}
+      <button type="submit" name="add_question" class="btn btn-success">
+        Add Question
+      </button>
+    </form>
+  </section>
+
+  <hr>
+
+  <!-- Existing Questions List -->
+  <section>
+    <h2 class="h4 mb-3">Existing Questions</h2>
+    {% if questions %}
+      <ul class="list-group shadow-sm rounded">
+        {% for question in questions %}
+          <li class="list-group-item border-0 border-bottom border-secondary-subtle">
+            <form method="post" class="mb-3">
+              {% csrf_token %}
+              <input type="hidden" name="question_id" value="{{ question.id }}">
+              {{ question_forms|get_item_as_p:question.id|safe }}
+              <div class="mt-2 d-flex gap-2">
+                <button type="submit" name="update_question" class="btn btn-primary btn-sm">
+                  Update
+                </button>
+                <button type="submit" name="delete_question" class="btn btn-danger btn-sm"
+                        onclick="return confirm('Are you sure you want to delete this question?');">
+                  Delete
+                </button>
+              </div>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-muted fst-italic">No questions available for this subject.</p>
+    {% endif %}
+  </section>
+
+  <!-- Back Button -->
+  <a href="{% url 'subject_list' %}" class="btn btn-secondary mt-4">Back to Subjects</a>
+</div>
+{% endblock %}
