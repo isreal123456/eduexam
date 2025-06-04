@@ -1,72 +1,76 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}{{ subject.name }} - Exam{% endblock %}
+{% block title %}Take Exam{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <h2 class="mb-4">{{ subject.name }} Exam</h2>
+<h2 class="mb-4">Take Exam - {{ subject.name }}</h2>
 
-    <div class="alert alert-info d-flex justify-content-between align-items-center">
-        <div><strong>Time Remaining:</strong> <span id="timer"></span></div>
-    </div>
-
-    <form method="post" id="examForm">
-        {% csrf_token %}
-        {% for question in questions %}
-        <div class="card mb-4">
-            <div class="card-header">
-                <strong>Q{{ forloop.counter }}:</strong> {{ question.text }}
-            </div>
-            <div class="card-body">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="q{{ question.id }}" value="A" id="q{{ question.id }}a">
-                    <label class="form-check-label" for="q{{ question.id }}a">{{ question.option_a }}</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="q{{ question.id }}" value="B" id="q{{ question.id }}b">
-                    <label class="form-check-label" for="q{{ question.id }}b">{{ question.option_b }}</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="q{{ question.id }}" value="C" id="q{{ question.id }}c">
-                    <label class="form-check-label" for="q{{ question.id }}c">{{ question.option_c }}</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="q{{ question.id }}" value="D" id="q{{ question.id }}d">
-                    <label class="form-check-label" for="q{{ question.id }}d">{{ question.option_d }}</label>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-
-        <button type="submit" class="btn btn-primary">Submit Exam</button>
-    </form>
+<div class="mb-3">
+  <strong>Time Remaining: <span id="timer" class="text-danger fw-bold">Loading...</span></strong>
 </div>
+
+{% if questions %}
+<form method="post" action="{% url 'submit_exam' subject.id %}" id="examForm">
+  {% csrf_token %}
+
+  {% for question in questions %}
+    <div class="mb-4">
+      <p><strong>Q{{ forloop.counter }}:</strong> {{ question.text }}</p>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="q{{ question.id }}_A" value="A" required>
+        <label class="form-check-label" for="q{{ question.id }}_A">{{ question.option_a }}</label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="q{{ question.id }}_B" value="B">
+        <label class="form-check-label" for="q{{ question.id }}_B">{{ question.option_b }}</label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="q{{ question.id }}_C" value="C">
+        <label class="form-check-label" for="q{{ question.id }}_C">{{ question.option_c }}</label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="q{{ question.id }}_D" value="D">
+        <label class="form-check-label" for="q{{ question.id }}_D">{{ question.option_d }}</label>
+      </div>
+    </div>
+  {% endfor %}
+
+  <button type="submit" class="btn btn-primary mt-3">Submit Exam</button>
+</form>
+{% else %}
+  <p>No questions available for this exam.</p>
+{% endif %}
 {% endblock %}
 
 {% block extra_js %}
 <script>
-    const timeLeft = {{ duration_seconds }};
+  document.addEventListener('DOMContentLoaded', function () {
+    let countdown = {{ duration_seconds }};
     const timerElement = document.getElementById('timer');
-    const examForm = document.getElementById('examForm');
-
-    let countdown = timeLeft;
+    const form = document.getElementById('examForm');
 
     function updateTimer() {
-        const minutes = Math.floor(countdown / 60);
-        const seconds = countdown % 60;
+      const minutes = Math.floor(countdown / 60);
+      const seconds = countdown % 60;
+      timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
-        timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      if (countdown <= 0) {
+        clearInterval(timerInterval);
+        timerElement.textContent = "00:00";
+        alert("Time is up! Submitting your exam...");
+        form.submit();
+      }
 
-        if (countdown <= 0) {
-            clearInterval(timerInterval);
-            timerElement.textContent = "00:00";
-            examForm.submit();
-        }
-
-        countdown--;
+      countdown--;
     }
 
     const timerInterval = setInterval(updateTimer, 1000);
     updateTimer();
+  });
 </script>
 {% endblock %}

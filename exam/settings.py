@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-puhmev65ujf5@)m^7%rf2^a6)n^85slon)&$o6raqa-s9m2g^n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -128,3 +128,14 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'subject_list'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'sundayisrael41@gmail.com'  # Replace with your Gmail
+EMAIL_HOST_PASSWORD = 'hyvsrxgarcocgwuj'  # Use App Password (not your Gmail password)
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+

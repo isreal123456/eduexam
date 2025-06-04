@@ -1,60 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Welcome to EduExam</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <!-- Bootstrap CSS & Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- AOS Animation CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Hover effect on cards */
+      .card:hover {
+        transform: scale(1.02);
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
+    </style>
 </head>
 <body class="bg-light">
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+      <div class="container">
+        <a class="navbar-brand fw-bold text-primary" href="#">EduExam</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#aboutModal"
+                >About EduExam</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <div class="container py-5 text-center">
-        <h1 class="display-4 fw-bold mb-4 text-primary">Welcome to EduExam</h1>
-        <p class="lead text-muted mb-5">A powerful online platform for managing and taking exams efficiently.</p>
+      <h1 class="display-4 fw-bold mb-4 text-primary" data-aos="fade-down">
+        Welcome to EduExam
+      </h1>
+      <p class="lead text-muted mb-5" data-aos="fade-up" data-aos-delay="200">
+        A powerful online platform for managing and taking exams efficiently.
+      </p>
 
-        <div class="row g-4 mb-5">
-            <!-- Students Section -->
-            <div class="col-md-6">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="card-body">
-                        <h3 class="text-primary mb-3"><i class="bi bi-person-lines-fill me-2"></i>For Students</h3>
-                        <ul class="list-unstyled text-start small">
-                            <li><i class="bi bi-check-circle text-success me-2"></i>Take exams with a timer</li>
-                            <li><i class="bi bi-check-circle text-success me-2"></i>Practice with real questions</li>
-                            <li><i class="bi bi-check-circle text-success me-2"></i>Track scores and progress</li>
-                        </ul>
-                    </div>
-                </div>
+      <div class="row g-4 mb-5">
+        <!-- Students Section -->
+        <div
+          class="col-md-6"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+              <h3 class="text-primary mb-3">
+                <i class="bi bi-person-lines-fill me-2"></i>For Students
+              </h3>
+              <ul class="list-unstyled text-start small">
+                <li>
+                  <i class="bi bi-check-circle text-success me-2"></i>Take exams
+                  with a timer
+                </li>
+                <li>
+                  <i class="bi bi-check-circle text-success me-2"></i>Practice with
+                  real questions
+                </li>
+                <li>
+                  <i class="bi bi-check-circle text-success me-2"></i>Track scores
+                  and progress
+                </li>
+              </ul>
             </div>
-
-            <!-- Staff Section -->
-            <div class="col-md-6">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="card-body">
-                        <h3 class="text-success mb-3"><i class="bi bi-person-badge-fill me-2"></i>For Staff</h3>
-                        <ul class="list-unstyled text-start small">
-                            <li><i class="bi bi-check-circle text-success me-2"></i>Create and manage subjects</li>
-                            <li><i class="bi bi-check-circle text-success me-2"></i>Add and update exam questions</li>
-                            <li><i class="bi bi-check-circle text-success me-2"></i>View student results and reports</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
 
-        <div class="d-flex justify-content-center gap-4">
-            <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-4">Login</a>
-            <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-lg px-4">Register</a>
+        <!-- Staff Section -->
+        <div
+          class="col-md-6"
+          data-aos="fade-up"
+          data-aos-delay="400"
+        >
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+              <h3 class="text-success mb-3">
+                <i class="bi bi-person-badge-fill me-2"></i>For Staff
+              </h3>
+              <ul class="list-unstyled text-start small">
+                <li>
+                  <i class="bi bi-check-circle text-success me-2"></i>Create and
+                  manage subjects
+                </li>
+                <li>
+                  <i class="bi bi-check-circle text-success me-2"></i>Add and update
+                  exam questions
+                </li>
+                <li>
+                  <i class="bi bi-check-circle text-success me-2"></i>View student
+                  results and reports
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div class="d-flex justify-content-center gap-4" data-aos="fade-up" data-aos-delay="500">
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-4" id="loginBtn"
+          >Login</a
+        >
+        <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-lg px-4"
+          >Register</a
+        >
+      </div>
     </div>
 
     <footer class="text-center mt-5 text-muted small">
-        <p>&copy; {{ now|date:"Y" }} EduExam. All rights reserved.</p>
+      <p>&copy; {{ now|date:"Y" }} EduExam. All rights reserved.</p>
     </footer>
 
-    <!-- Bootstrap JS -->
+    <!-- Toast Notification -->
+    <div
+      class="position-fixed bottom-0 end-0 p-3"
+      style="z-index: 11"
+      id="toastContainer"
+    >
+      <div
+        id="welcomeToast"
+        class="toast align-items-center text-bg-primary border-0"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        data-bs-delay="3000"
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            Welcome! Redirecting you now...
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Modal -->
+    <div
+      class="modal fade"
+      id="aboutModal"
+      tabindex="-1"
+      aria-labelledby="aboutModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="aboutModalLabel">About EduExam</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            EduExam is a modern online exam platform designed to help students
+            prepare effectively and staff manage exams seamlessly. Features
+            include timed exams, question management, progress tracking, and
+            detailed reports.
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AOS Animation JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      AOS.init();
+
+      // Show toast on login button click
+      const loginBtn = document.getElementById("loginBtn");
+      const toastEl = document.getElementById("welcomeToast");
+      if (loginBtn && toastEl) {
+        loginBtn.addEventListener("click", (event) => {
+          event.preventDefault(); // Prevent immediate navigation to show toast
+
+          const toast = new bootstrap.Toast(toastEl);
+          toast.show();
+
+          // After toast duration, redirect to login page
+          setTimeout(() => {
+            window.location.href = loginBtn.href;
+          }, 3100);
+        });
+      }
+    </script>
 </body>
 </html>
