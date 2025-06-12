@@ -5,7 +5,7 @@
 {% block content %}
 <!-- Welcome Section -->
 <div class="text-center mb-5">
-  <h2 class="fw-bold">Welcome, {{ user.full_name }}!</h2>
+  <h2 class="fw-bold">Welcome, {{ user.full_name }}</h2>
   <p class="text-muted">Get started with your studies and track your exam progress easily.</p>
 </div>
 
@@ -20,7 +20,7 @@
           <i class="bi bi-book fs-1 text-primary me-3"></i>
           <div>
             <h5 class="text-primary mb-0">Subjects</h5>
-            <p class="fs-4 fw-semibold mb-0">{{ subjects_count }}</p>
+            <p class="fs-4 fw-semibold mb-0" data-bs-toggle="tooltip" title="Browse all available subjects">{{ subjects_count }}</p>
           </div>
         </div>
         <p class="text-muted">Browse all available subjects to learn and take exams.</p>
@@ -37,7 +37,7 @@
           <i class="bi bi-question-circle fs-1 text-success me-3"></i>
           <div>
             <h5 class="text-success mb-0">Questions</h5>
-            <p class="fs-4 fw-semibold mb-0">{{ questions_count }}</p>
+            <p class="fs-4 fw-semibold mb-0" data-bs-toggle="tooltip" title="Practice with questions coming soon">{{ questions_count }}</p>
           </div>
         </div>
         <p class="text-muted">Practice with questions to prepare for your exams.</p>
@@ -54,7 +54,7 @@
           <i class="bi bi-check2-circle fs-1 text-info me-3"></i>
           <div>
             <h5 class="text-info mb-0">Exams Taken</h5>
-            <p class="fs-4 fw-semibold mb-0">{{ exams_taken }}</p>
+            <p class="fs-4 fw-semibold mb-0" data-bs-toggle="tooltip" title="Review your completed exams">{{ exams_taken }}</p>
           </div>
         </div>
         <p class="text-muted">Review your completed exams and performance stats.</p>
@@ -64,4 +64,17 @@
   </div>
 
 </div>
+
+<!-- Bootstrap Icons CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+<script>
+  // Initialize Bootstrap tooltips
+  document.addEventListener('DOMContentLoaded', function () {
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+      new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+  });
+</script>
 {% endblock %}

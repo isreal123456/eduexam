@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.shortcuts import get_object_or_404
+
 from paper.models import ExamResult, Subject
+
 
 def is_staff_user(user):
     return user.is_authenticated and user.is_staff
