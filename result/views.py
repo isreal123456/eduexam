@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 
 from paper.models import ExamResult, Subject
 
+# New Changes
 
 def is_staff_user(user):
     return user.is_authenticated and user.is_staff
